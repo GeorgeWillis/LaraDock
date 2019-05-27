@@ -11,7 +11,8 @@ RUN apk --update --no-cache add ca-certificates \
     bash \
     supervisor \
     nodejs \
-    nodejs-npm
+    nodejs-npm \
+    nano
 
 
 # trust this project public key to trust the packages.
