@@ -1,7 +1,7 @@
 # Alpine Image for Nginx and PHP
 
 # NGINX x ALPINE.
-FROM codecasts/alpine-3.9:php-7.3
+FROM nginx:1.15.7-alpine
 
 # MAINTAINER OF THE PACKAGE.
 LABEL maintainer="George Willis <George@uicreative.co.uk>"
@@ -16,8 +16,7 @@ RUN apk --update --no-cache add ca-certificates \
 
 
 # trust this project public key to trust the packages.
-ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
-
+ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
 # IMAGE ARGUMENTS WITH DEFAULTS.
 ARG PHP_VERSION=7.2
@@ -29,10 +28,10 @@ ARG NGINX_HTTPS_PORT=443
 # CONFIGURE ALPINE REPOSITORIES AND PHP BUILD DIR.
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/main" > /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/community" >> /etc/apk/repositories && \
-    echo "@php https://dl.bintray.com/php-alpine/v3.9/php-7.3" >> /etc/apk/repositories
+    echo "@php https://php.codecasts.rocks/v${ALPINE_VERSION}/php-${PHP_VERSION}" >> /etc/apk/repositories
 
 # INSTALL PHP AND SOME EXTENSIONS. SEE: https://github.com/codecasts/php-alpine
-RUN apk add --update php-fpm@php \
+RUN apk add --no-cache --update php-fpm@php \
     php@php \
     php-openssl@php \
     php-pdo@php \
