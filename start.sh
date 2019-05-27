@@ -62,3 +62,12 @@ find /etc/php7/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {}
 
 # START SUPERVISOR.
 exec /usr/bin/supervisord -n -c /etc/supervisord.conf
+
+#Application Bootstrapping
+composer install
+cp .env.example .env
+php artisan key:generate
+
+npm install
+npm run dev
+
