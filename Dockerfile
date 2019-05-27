@@ -32,7 +32,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/main" > /etc/a
     echo "@php https://dl.bintray.com/php-alpine/v3.9/php-7.3" >> /etc/apk/repositories
 
 # INSTALL PHP AND SOME EXTENSIONS. SEE: https://github.com/codecasts/php-alpine
-RUN apk add --no-cache --update php-fpm@php \
+RUN apk add --update php-fpm@php \
     php@php \
     php-openssl@php \
     php-pdo@php \
