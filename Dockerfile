@@ -16,7 +16,8 @@ RUN apk --update --no-cache add ca-certificates \
 
 
 # trust this project public key to trust the packages.
-ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+#ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+ADD https://alpinelinux.org/keys/alpine-devel%40lists.alpinelinux.org-4a6a0840.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
 # IMAGE ARGUMENTS WITH DEFAULTS.
 ARG PHP_VERSION=7.2
