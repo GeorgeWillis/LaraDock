@@ -1,10 +1,13 @@
 # Alpine Image for Nginx and PHP
 
 # NGINX x ALPINE.
-FROM nginx:1.15.7-alpine
+FROM alpine:3.7
 
 # MAINTAINER OF THE PACKAGE.
 LABEL maintainer="George Willis <George@uicreative.co.uk>"
+
+
+RUN apk add --no-cache --update tini
 
 # INSTALL SOME SYSTEM PACKAGES.
 RUN apk --update --no-cache add ca-certificates \
@@ -15,9 +18,6 @@ RUN apk --update --no-cache add ca-certificates \
     nano
 
 
-# trust this project public key to trust the packages.
-ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
-
 # IMAGE ARGUMENTS WITH DEFAULTS.
 ARG PHP_VERSION=7.2
 ARG ALPINE_VERSION=3.7
@@ -25,26 +25,40 @@ ARG COMPOSER_HASH=48e3236262b34d30969dca3c37281b3b4bbe3221bda826ac6a9a62d6444cdb
 ARG NGINX_HTTP_PORT=80
 ARG NGINX_HTTPS_PORT=443
 
-# CONFIGURE ALPINE REPOSITORIES AND PHP BUILD DIR.
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/main" > /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/community" >> /etc/apk/repositories && \
-    echo "@php https://php.codecasts.rocks/v${ALPINE_VERSION}/php-${PHP_VERSION}" >> /etc/apk/repositories
 
 # INSTALL PHP AND SOME EXTENSIONS. SEE: https://github.com/codecasts/php-alpine
-RUN apk add --no-cache --update php-fpm@php \
-    php@php \
-    php-openssl@php \
-    php-pdo@php \
-    php-pdo_mysql@php \
-    php-mbstring@php \
-    php-phar@php \
-    php-session@php \
-    php-dom@php \
-    php-ctype@php \
-    php-zlib@php \
-    php-json@php \
-    php-xml@php && \
-    ln -s /usr/bin/php7 /usr/bin/php
+RUN apk add --no-cache --update \
+    php7 \
+    php7-apcu \
+    php7-bcmath \
+    php7-bz2 \
+    php7-cgi \
+    php7-ctype \
+    php7-curl \
+    php7-dom \
+    php7-fpm \
+    php7-ftp \
+    php7-gd \
+    php7-iconv \
+    php7-json \
+    php7-mbstring \
+    php7-oauth \
+    php7-opcache \
+    php7-openssl \
+    php7-pcntl \
+    php7-pdo \
+    php7-pdo_mysql \
+    php7-phar \
+    php7-redis \
+    php7-session \
+    php7-simplexml \
+    php7-tokenizer \
+    php7-xdebug \
+    php7-xml \
+    php7-xmlwriter \
+    php7-zip \
+    php7-zlib \
+    php7-zmq
 
 # CONFIGURE WEB SERVER.
 RUN mkdir -p /var/www && \
