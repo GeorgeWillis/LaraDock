@@ -1,7 +1,7 @@
 # Alpine Image for Nginx and PHP
 
 # NGINX x ALPINE.
-FROM alpine:3.7
+FROM nginx:1.15.7-alpine
 
 # MAINTAINER OF THE PACKAGE.
 LABEL maintainer="George Willis <George@uicreative.co.uk>"
