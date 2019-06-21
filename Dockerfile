@@ -17,6 +17,7 @@ RUN apk --update --no-cache add ca-certificates \
     nodejs-npm \
     nano
 
+RUN apk add --no-cache mysql-client
 
 # IMAGE ARGUMENTS WITH DEFAULTS.
 ARG PHP_VERSION=7.2
