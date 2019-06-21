@@ -58,7 +58,9 @@ RUN apk add --no-cache --update \
     php7-xmlwriter \
     php7-zip \
     php7-zlib \
-    php7-zmq
+    php7-zmq \
+    php7-fileinfo
+    
 
 # CONFIGURE WEB SERVER.
 RUN mkdir -p /var/www && \
